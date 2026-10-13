@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #14161a;
+  --color-cream: #fbf3e4;
+  --color-paper: #fffbf3;
+  --color-line: #d9cfbc;
+  --color-strong: #2d3748;
+  --color-body: #4a5568;
+  --color-muted: #5a6577;
+  --color-on-dark: #c9cfda;
+
+  --color-brand: #3b5bdb;
+  --color-brand-soft: #cfe0ff;
+  --color-brand-deep: #1f3a6b;
+  --color-sun: #f6d365;
+  --color-sun-deep: #6b4e00;
+  --color-sun-step: #d99a00;
+  --color-mint: #bfe6cc;
+  --color-mint-deep: #1e5b3a;
+  --color-mint-step: #2e9e62;
+  --color-peach: #f7b9a0;
+  --color-peach-soft: #f7d9c9;
+  --color-coral: #f25c54;
+  --color-coral-step: #e0553d;
+  --color-sky: #a9cbf7;
+
+  --radius-field: 12px;
+  --radius-card: 18px;
+  --radius-panel: 28px;
+  --shadow-hard: 8px 8px 0 var(--color-sun);
+  --container-page: 1180px;
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-cream font-sans text-ink antialiased; }
+}
+
+@layer components {
+  .btn  { @apply inline-flex items-center gap-2 rounded-field border-[1.5px] border-ink px-5 py-3.5 text-[15px] font-bold transition-opacity hover:opacity-90; }
+  .tag  { @apply inline-block rounded-full border-[1.5px] border-ink bg-white px-3 py-1.5 text-xs font-bold; }
+  .card { @apply flex flex-col gap-2.5 rounded-card border-[1.5px] border-line bg-paper p-5; }
+  .shot { @apply overflow-hidden rounded-[14px] border-[1.5px] border-ink bg-white shadow-hard; }
+  .field{ @apply w-full rounded-field border-[1.5px] border-ink bg-white px-4 py-3.5 text-[15px] font-medium; }
+}
