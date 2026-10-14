@@ -34,17 +34,73 @@
 
 @theme inline {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --breakpoint-xs: 475px;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-cream font-sans text-ink antialiased; }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
 }
 
 @layer components {
-  .btn  { @apply inline-flex items-center gap-2 rounded-field border-[1.5px] border-ink px-5 py-3.5 text-[15px] font-bold transition-opacity hover:opacity-90; }
-  .tag  { @apply inline-block rounded-full border-[1.5px] border-ink bg-white px-3 py-1.5 text-xs font-bold; }
-  .card { @apply flex flex-col gap-2.5 rounded-card border-[1.5px] border-line bg-paper p-5; }
-  .shot { @apply overflow-hidden rounded-[14px] border-[1.5px] border-ink bg-white shadow-hard; }
-  .field{ @apply w-full rounded-field border-[1.5px] border-ink bg-white px-4 py-3.5 text-[15px] font-medium; }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-field border-[1.5px] border-ink px-5 py-3.5 text-[15px] font-bold transition-opacity hover:opacity-90;
+  }
+  .tag {
+    @apply inline-block rounded-full border-[1.5px] border-ink bg-white px-3 py-1.5 text-xs font-bold;
+  }
+  .card {
+    @apply flex flex-col gap-2.5 rounded-card border-[1.5px] border-line bg-paper p-5;
+  }
+  .shot {
+    @apply overflow-hidden rounded-[14px] border-[1.5px] border-ink bg-white shadow-hard;
+  }
+  .field {
+    @apply w-full rounded-field border-[1.5px] border-ink bg-white px-4 py-3.5 text-[15px] font-medium;
+  }
+}
+
+@utility container-page {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--container-page);
+  padding-inline: 1rem;
+}
+
+@utility nav-link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-strong);
+    transition: width 0.2s ease-in-out;
+  }
+
+  &:hover::after,
+  nav-link-btn &:focus-visible::after {
+    width: 100%;
+  }
+}
+
+@utility nav-link-btn {
+  padding: 12px;
+  background: var(--color-strong);
+  color: var(--color-cream);
+  border: 2px solid var(--color-strong);
+  border-radius: 8px;
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    background: transparent;
+    color: var(--color-strong);
+  }
 }
