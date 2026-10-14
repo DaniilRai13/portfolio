@@ -1,0 +1,1 @@
+export const navLinks:string[] = ['home','services','projects','about','contact']
