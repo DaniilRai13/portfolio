@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daniil Rai — Portfolio
 
-## Getting Started
+Personal portfolio of a frontend developer: services, selected projects, process and a contact form that delivers messages to Telegram.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router, Server Actions) · React 19 · TypeScript · Tailwind CSS 4
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in the values
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Production URL for canonical links, Open Graph, sitemap and robots. Optional on Vercel. |
+| `TELEGRAM_BOT_TOKEN` | Bot token from @BotFather — the contact form sends messages through this bot. |
+| `TELEGRAM_CHAT_ID` | Chat that receives the messages. |
 
-## Learn More
+Without the Telegram variables the form shows a friendly error and suggests email or Telegram instead.
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/                 layout, page, metadata routes (icon, OG image, sitemap, robots)
+app/actions/         Server Actions (contact form)
+components/layout/   header, navigation, mobile menu, footer
+components/sections/ page sections: Hero, WhatIDo, Projects, About, HowIWork, Contact
+components/ui/       shared UI: Button, Heading, Section, Field, Badge, Alert, Marquee…
+data/                content: projects, services, about, links, site config
+hooks/               client hooks (active section in navigation)
+public/images/       project screenshots
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Content lives in `data/` — to add a project, put screenshots into `public/images/projects/<id>/` and add an entry to `data/projects.data.ts`.
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm run start` — run the production build
+- `npm run lint` — ESLint
