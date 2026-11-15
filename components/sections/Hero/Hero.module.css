@@ -1,0 +1,202 @@
+/* Пульсирующая точка статуса */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgb(59 91 219 / 35%);
+  }
+
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 5px rgb(59 91 219 / 0%);
+  }
+}
+
+.statusDot {
+  flex-shrink: 0;
+  animation: status-pulse 2.4s ease-out infinite;
+}
+
+/* Появление снизу: метка, слова заголовка, описание, кнопки, теги */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.introLabel {
+  animation: rise-in 450ms ease-out both;
+}
+
+.word {
+  display: inline-block;
+  animation: rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.description,
+.buttons {
+  animation: rise-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Фото проявляется с небольшим увеличением */
+@keyframes photo-in {
+  from {
+    opacity: 0;
+    scale: 0.88;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.photo {
+  animation: photo-in 800ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+
+/* Бесконечное вращение пунктирного круга */
+@keyframes orbit {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.orbit {
+  animation: orbit 35s linear infinite;
+}
+
+/* Плавное движение цветных фигур */
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 8px -10px;
+  }
+}
+
+@keyframes float-fast {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.floatSlow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.floatFast {
+  animation: float-fast 3.5s ease-in-out infinite;
+}
+
+/* Кольцо справа сверху и мелкие фигуры */
+@keyframes pulse {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
+.pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 90deg;
+  }
+}
+
+.spin {
+  animation: spin 8s ease-in-out infinite alternate;
+}
+
+@keyframes spark-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    scale: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1.08;
+  }
+}
+
+.spark {
+  transform-origin: center;
+  animation: spark-pulse 3s ease-in-out infinite;
+}
+
+/* Теги технологий */
+.tag {
+  animation: rise-in 600ms ease-out both;
+  transition:
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.tag:hover {
+  background-color: var(--color-brand-soft);
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+
+/* Уважение системной настройки уменьшения анимации */
+@media (prefers-reduced-motion: reduce) {
+  .statusDot,
+  .introLabel,
+  .word,
+  .description,
+  .buttons,
+  .photo,
+  .orbit,
+  .float,
+  .floatSlow,
+  .floatFast,
+  .pulse,
+  .spin,
+  .spark,
+  .tag {
+    /* translate/rotate не сбрасываем: ими же Tailwind центрирует фото и наклоняет теги */
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .tag {
+    transition: none;
+  }
+}
