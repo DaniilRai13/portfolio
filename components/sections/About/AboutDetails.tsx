@@ -1,49 +1,49 @@
-import Badge from "@/components/ui/Badge";
+import type { ReactNode } from "react";
 import { aboutData } from "@/data/about-me.data";
 
-const cardClasses = "min-w-0 rounded-card border-[1.5px] border-line bg-cream p-5 sm:p-6";
+const languagesText = aboutData.languages
+  .map((language) => `${language.name} — ${language.level.toLowerCase()}`)
+  .join(" · ");
 
+const specs: { term: string; value: ReactNode }[] = [
+  { term: aboutData.focusTitle, value: aboutData.focus },
+  {
+    term: aboutData.techSkillsTitle,
+    value: (
+      <ul className="flex flex-wrap gap-1.5">
+        {aboutData.techSkills.map((skill) => (
+          <li
+            key={skill.name}
+            className={`rounded-full border-[1.5px] border-ink px-2.5 py-1 text-xs font-bold text-ink ${skill.bgColor ?? "bg-paper"}`}
+          >
+            {skill.name}
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
+    term: aboutData.educationTitle,
+    value: `${aboutData.education.institution} — ${aboutData.education.field}`,
+  },
+  { term: aboutData.languagesTitle, value: languagesText },
+];
+
+/** Таблица фактов: термин слева, значение справа */
 export default function AboutDetails() {
   return (
-    <div className="grid min-w-0 grid-cols-1 gap-4">
-      {/* Tech stack */}
-      <article className={cardClasses}>
-        <h3 className="mb-3 text-base font-bold text-ink">{aboutData.techSkillsTitle}</h3>
-
-        <div className="flex flex-wrap gap-2">
-          {aboutData.techSkills.map((skill) => (
-            <Badge
-              key={skill.name}
-              className={`text-[13px] text-ink ${skill.bgColor ?? "bg-paper ring-1 ring-line"}`}
-            >
-              {skill.name}
-            </Badge>
-          ))}
+    <dl className="mt-10 border-t-[1.5px] border-ink">
+      {specs.map((spec) => (
+        <div
+          key={spec.term}
+          className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_1fr] sm:gap-6"
+        >
+          <dt className="pt-0.5 text-xs font-bold tracking-[0.14em] text-muted uppercase">
+            {spec.term}
+          </dt>
+          <dd className="min-w-0 text-[15px] leading-relaxed text-ink">{spec.value}</dd>
         </div>
-      </article>
-
-      {/* Education and languages */}
-      <article className={`${cardClasses} grid gap-5 sm:grid-cols-2`}>
-        <div>
-          <h3 className="mb-1.5 text-base font-bold text-ink">{aboutData.educationTitle}</h3>
-          <p className="text-[15px] leading-relaxed text-body">
-            {aboutData.education.institution}
-            <br />
-            {aboutData.education.field}
-          </p>
-        </div>
-
-        <div>
-          <h3 className="mb-1.5 text-base font-bold text-ink">{aboutData.languagesTitle}</h3>
-          <ul className="space-y-0.5 text-[15px] leading-relaxed text-body">
-            {aboutData.languages.map((language) => (
-              <li key={language.name}>
-                {language.name} — {language.level.toLowerCase()}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </article>
-    </div>
+      ))}
+    </dl>
   );
 }

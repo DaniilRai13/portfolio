@@ -11,6 +11,10 @@ export const aboutData: IAboutData = {
     "I use AI-assisted tools to move faster, and I make sure I understand every line I ship.",
   ],
 
+  focusTitle: "Focus",
+
+  focus: "React & TypeScript interfaces: dashboards, data visualization, marketing websites",
+
   techSkillsTitle: "Tech I work with",
 
   techSkills: [

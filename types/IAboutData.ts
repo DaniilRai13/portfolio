@@ -16,6 +16,8 @@ export interface ILanguage {
 export interface IAboutData {
   title: string;
   paragraphs: string[];
+  focusTitle: string;
+  focus: string;
   techSkillsTitle: string;
   techSkills: ITechSkill[];
   educationTitle: string;
