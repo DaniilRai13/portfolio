@@ -98,7 +98,7 @@
   }
 
   .section-space {
-    @apply scroll-mt-24 py-16 sm:py-20 lg:py-24;
+    @apply scroll-mt-24 py-16 sm:py-20 lg:scroll-mt-0 lg:py-24;
   }
 }
 
@@ -110,6 +110,15 @@
 
   @media (max-width: 768px) {
     padding-inline: 1rem;
+  }
+
+  /*
+   * На lg+ слева фиксированная рейка навигации (отступ 16px + ширина 64px).
+   * Фоны секций остаются на всю ширину, сдвигаем только контент —
+   * и только когда контейнер прижат к левому краю экрана.
+   */
+  @media (min-width: 1024px) {
+    padding-left: max(2rem, calc(8rem - max(0px, (100vw - var(--container-page)) / 2)));
   }
 }
 
